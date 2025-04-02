@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatty</title>
+    <link rel="icon" href="134914.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        h1 {
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+        .chat-container {
+            width: 400px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            text-align: center;
+        }
+        .chat-header {
+            background: #6200ea;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+        }
+        #chat-box {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin: 5px 0;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background: #007bff;
+            color: white;
+            align-self: flex-end;
+        }
+        .bot-message {
+            background: #e0e0e0;
+            color: black;
+            align-self: flex-start;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background: #fff;
+            border-top: 1px solid #ccc;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .chat-input button {
+            background: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .chat-input button:hover {
+            background: #4500b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>CHATTY</h1>
+    <div class="chat-container">
+        <div class="chat-header">Simple Chat</div>
+        <div id="chat-box"></div>
+        <div class="chat-input">
+            <input type="text" id="message" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("message").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            let messageInput = document.getElementById('message');
+            let chatBox = document.getElementById('chat-box');
+            let message = messageInput.value.trim();
+
+            if (message) {
+                let userMessage = document.createElement("div");
+                userMessage.classList.add("message", "user-message");
+                userMessage.textContent = message;
+                chatBox.appendChild(userMessage);
+
+                // Simulated bot response
+                setTimeout(() => {
+                    let botMessage = document.createElement("div");
+                    botMessage.classList.add("message", "bot-message");
+                    botMessage.textContent = "Bot: " + generateBotResponse(message);
+                    chatBox.appendChild(botMessage);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 500);
+
+                messageInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        function generateBotResponse(userInput) {
+            const responses = {
+                "hello": "Hi there!",
+                "how are you": "I'm just a bot, but I'm doing great!",
+                "bye": "Goodbye! Have a nice day!",
+                "default": "I'm not sure how to respond to that."
+            };
+            return responses[userInput.toLowerCase()] || responses["default"];
+        }
+    </script>
+</body>
+</html>
