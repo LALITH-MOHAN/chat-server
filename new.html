@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHATTY</title>
+    <link rel="icon" href="134914.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 style="text-align: center;color: #771470;;">CHATTY</h1>
+    <div class="chat-container">
+        <div class="chat-header" id="chat-header">
+            <p>Username: <span id="username-display" class="left"></span></p>
+            <span id="date-display" class="right"></span>
+        </div>        
+        <div id="chat-box"></div>
+        <div class="chat-input">
+            <input type="text" id="message" placeholder="Type Here">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
